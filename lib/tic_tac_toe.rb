@@ -28,6 +28,10 @@ def move(index, player = "X")
   @board[index] = player
 end
 
+def position_taken?(index)
+  @board[index] == 'X' || @board[index] == 'O'
+end
+
 def play
   turn(board) until over?(board)
   if won?(board)
@@ -71,10 +75,6 @@ def turn(board)
   else
     turn(board)
   end
-end
-
-def position_taken?(board, index)
-  board[index] == 'X' || board[index] == 'O'
 end
 
 def current_player(board)
