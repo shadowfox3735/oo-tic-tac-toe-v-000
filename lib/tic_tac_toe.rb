@@ -24,6 +24,10 @@ def input_to_index(user_input)
   user_input.to_i - 1
 end
 
+def move(index, player = "X")
+  @board[index] = player
+end
+
 def play
   turn(board) until over?(board)
   if won?(board)
@@ -79,10 +83,6 @@ end
 
 def turn_count(board)
   board.count { |token| token == 'X' || token == 'O' }
-end
-
-def move(board, index, player)
-  @board[index] = player
 end
 
 def winner(board)
