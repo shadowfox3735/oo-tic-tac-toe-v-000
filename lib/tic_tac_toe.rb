@@ -68,6 +68,10 @@ def full?
   @board.all? { |token| token == 'X' || token == 'O' }
 end
 
+def draw?
+  !won? && full?
+end
+
 def play
   turn(board) until over?(board)
   if won?(board)
@@ -75,10 +79,6 @@ def play
   elsif draw?(board)
     puts "Cat's Game!"
   end
-end
-
-def draw?(board)
-  !won?(board) && full?(board)
 end
 
 def over?(board)
