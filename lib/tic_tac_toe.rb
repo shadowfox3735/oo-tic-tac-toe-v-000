@@ -32,6 +32,30 @@ def position_taken?(index)
   @board[index] == 'X' || @board[index] == 'O'
 end
 
+def valid_move?(index)
+  index.between?(0, 8) && !position_taken?(index)
+end
+
+def turn
+  puts 'Please enter 1-9:'
+  user_input = gets.strip
+  index = input_to_index(user_input)
+  if valid_move?(index)
+    move(index, current_player)
+    display_board
+  else
+    turn
+  end
+end
+
+def turn_count
+  @board.count { |token| token == 'X' || token == 'O' }
+end
+
+def current_player
+  turn_count.even? ? 'X' : 'O'
+end
+
 def play
   turn(board) until over?(board)
   if won?(board)
@@ -39,10 +63,6 @@ def play
   elsif draw?(board)
     puts "Cat's Game!"
   end
-end
-
-def valid_move?(board, index)
-  index.between?(0, 8) && !position_taken?(board, index)
 end
 
 def won?(board)
@@ -63,26 +83,6 @@ end
 
 def over?(board)
   won?(board) || draw?(board)
-end
-
-def turn(board)
-  puts 'Please enter 1-9:'
-  user_input = gets.strip
-  index = input_to_index(user_input)
-  if valid_move?(board, index)
-    move(board, index, current_player(board))
-    display_board(board)
-  else
-    turn(board)
-  end
-end
-
-def current_player(board)
-  turn_count(board).even? ? 'X' : 'O'
-end
-
-def turn_count(board)
-  board.count { |token| token == 'X' || token == 'O' }
 end
 
 def winner(board)
