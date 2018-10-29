@@ -20,6 +20,10 @@ def display_board
   puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
 end
 
+def input_to_index(user_input)
+  user_input.to_i - 1
+end
+
 def play
   turn(board) until over?(board)
   if won?(board)
@@ -51,10 +55,6 @@ end
 
 def over?(board)
   won?(board) || draw?(board)
-end
-
-def input_to_index(user_input)
-  user_input.to_i - 1
 end
 
 def turn(board)
